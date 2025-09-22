@@ -1,5 +1,6 @@
 const addBtn = document.querySelector('#add-btn');
 const todoList = document.querySelector('#todo-list');
+const emptyList = document.querySelector('#empty-list');
 console.log(addBtn);
 
 addBtn.addEventListener('click', (evt) => {
@@ -54,6 +55,10 @@ todoList.addEventListener('click', (evt) => {
     }
     const parentLi = evt.target.closest('li');
     parentLi.remove();
+
+    if (todoList.children.length === 0) {
+        emptyList.classList.remove('hiddem')
+    }
 });
 
 todoList.addEventListener('change', (evt) => {
