@@ -1,6 +1,8 @@
 const addBtn = document.querySelector('#add-btn');
 const todoList = document.querySelector('#todo-list');
 const emptyList = document.querySelector('#empty-list');
+
+const todos = []
 console.log(addBtn);
 
 addBtn.addEventListener('click', (evt) => {
@@ -17,6 +19,10 @@ addBtn.addEventListener('click', (evt) => {
         text: taskText,
         isCompleted: false,
     };
+
+    todos.push(task);
+    localStorage.setItem('todos', JSON.stringify(todos));
+    console.log(todos);
 
     todoList.insertAdjacentHTML(
         'beforeend',
@@ -55,9 +61,16 @@ todoList.addEventListener('click', (evt) => {
     }
     const parentLi = evt.target.closest('li');
     parentLi.remove();
+    todos.forEach((todo, index) => {
+        if (todo.id === parentLi.id) {
+            todos.splice(index, 1);
+        }
+    });
+
+    localStorage.setItem('todos', JSON.stringify(todos));
 
     if (todoList.children.length === 0) {
-        emptyList.classList.remove('hiddem')
+        emptyList.classList.remove('hidden')
     }
 });
 
