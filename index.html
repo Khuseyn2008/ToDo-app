@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="bg-gradient-to-br from-blue-200 to-purple-200 min-h-screen flex items-center justify-center font-sans">
+  <div class="container mx-auto max-w-md bg-white p-8 rounded-lg shadow-lg">
+    <!-- Заголовок -->
+    <header class="text-center mb-6">
+      <h1 class="text-3xl font-bold text-purple-700">Todo App</h1>
+    </header>
+
+    <!-- Форма добавления задачи -->
+    <form class="flex mb-4">
+      <input type="text" id="new-todo" placeholder="Add a new task" autocomplete="off"
+        class="w-full px-4 py-2 border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+      <button id="add-btn"
+        class="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd"
+            d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+            clip-rule="evenodd" />
+        </svg>
+      </button>
+    </form>
+
+    <!-- Список задач -->
+    <!-- beforebegin -->
+    <ul id="todo-list" class="space-y-2">
+      <!-- afterbegin -->
+      <!-- beforeend  -->
+    </ul>
+    <!-- afterend  -->
+    <div id="empty-list" class="text-center p-5 bg-green-100 text-green-500 rounded-lg">
+      Список дел пуст! Вы молодец!
+    </div>
+  </div>
+
+  <script src="scripts/todo.js"></script>
+</body>
+
+</html>
