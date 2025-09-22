@@ -3,7 +3,14 @@ const todoList = document.querySelector('#todo-list');
 const emptyList = document.querySelector('#empty-list');
 
 const todos = []
-console.log(addBtn);
+
+if (localStorage.getItem('todos')) {
+    const todosFromLS = JSON.parse(localStorage.getItem('todos'))
+    todos.push(...todosFromLS);
+    todos.forEach((todo) => {
+        renderTask(todo)
+    })
+}
 
 addBtn.addEventListener('click', (evt) => {
     evt.preventDefault();
@@ -20,31 +27,11 @@ addBtn.addEventListener('click', (evt) => {
         isCompleted: false,
     };
 
+    renderTask(task)
+
     todos.push(task);
     localStorage.setItem('todos', JSON.stringify(todos));
 
-    todoList.insertAdjacentHTML(
-        'beforeend',
-        `
-        <li id="${task.id}" class="flex items-center justify-between p-4 rounded-lg shadow ${
-            task.isCompleted ? 'bg-slate-50' : 'bg-purple-50'
-        }">
-        <div class="flex items-center">
-          <input type="checkbox" class="h-5 w-5 text-purple-500 focus:ring-purple-400 mr-3" ${
-              task.isCompleted ? 'checked' : ''
-          }>
-          <span class="${task.isCompleted ? 'text-gray-500 line-through' : 'text-gray-800'}">${
-            task.text
-        }</span>
-        </div>
-        <button data-action="delete" class="text-gray-400 hover:text-red-500">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
-        </button>
-      </li>
-        `
-    );
     taskInput.value = '';
     taskInput.focus();
 
@@ -89,3 +76,32 @@ todoList.addEventListener('change', (evt) => {
         taskText.classList.add('text-gray-800');
     }
 });
+
+function renderTask(task) {
+    todoList.insertAdjacentHTML(
+        'beforeend',
+        `
+        <li id="${task.id}" class="flex items-center justify-between p-4 rounded-lg shadow ${
+            task.isCompleted ? 'bg-slate-50' : 'bg-purple-50'
+        }">
+        <div class="flex items-center">
+          <input type="checkbox" class="h-5 w-5 text-purple-500 focus:ring-purple-400 mr-3" ${
+              task.isCompleted ? 'checked' : ''
+          }>
+          <span class="${task.isCompleted ? 'text-gray-500 line-through' : 'text-gray-800'}">${
+            task.text
+        }</span>
+        </div>
+        <button data-action="delete" class="text-gray-400 hover:text-red-500">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </li>
+        `
+    );
+    if (todoList.children.length === 0) {
+        emptyList.classList.remove('hidden')
+    }
+
+}
