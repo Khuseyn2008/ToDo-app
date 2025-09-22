@@ -22,7 +22,6 @@ addBtn.addEventListener('click', (evt) => {
 
     todos.push(task);
     localStorage.setItem('todos', JSON.stringify(todos));
-    console.log(todos);
 
     todoList.insertAdjacentHTML(
         'beforeend',
@@ -35,7 +34,7 @@ addBtn.addEventListener('click', (evt) => {
               task.isCompleted ? 'checked' : ''
           }>
           <span class="${task.isCompleted ? 'text-gray-500 line-through' : 'text-gray-800'}">${
-            task.text + ' 1 kg'
+            task.text
         }</span>
         </div>
         <button data-action="delete" class="text-gray-400 hover:text-red-500">
